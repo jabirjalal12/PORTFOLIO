@@ -1,0 +1,346 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* User-Specified Theme Palette (Sampled from image) */
+    --theme-navy: #012F61;
+    --theme-navy-deep: #022A5B;
+    --theme-teal: #0689A7;
+    --theme-sky: #67BAE6;
+    --theme-royal: #2E5FC6;
+    --theme-cobalt: #3F79CB;
+    --theme-glow: #E6CBDE;
+    --theme-coral: #FD9A95;
+    --theme-orange: #FD9D73;
+    --theme-rose: #FA5168;
+    --theme-magenta: #F76782;
+    --theme-orchid: #C85FA2;
+
+    /* Theme Tokens mapped to UI */
+    --bg-primary: #FAF6F4;
+    --bg-surface: #FFFFFF;
+    --bg-blush: #FDF2F7;
+    --rose: #FA5168;
+    --rose-dark: #D63354;
+    --rose-light: #FD9A95;
+    --rose-pale: #FEE8EE;
+    --plum: #C85FA2;
+    --plum-dark: #8E2B6D;
+    --gold: #FD9D73;
+    --gold-pale: #FFE8DF;
+    --ink: #0A192F;
+    --ink-muted: #334E68;
+    --ink-faint: #627D98;
+    --border: #D8E2EC;
+    --border-light: #EDF2F7;
+  }
+
+  body {
+    background-color: #012F61;
+    color: #0A192F;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+.font-display { font-family: 'Cinzel', serif; }
+.font-heading { font-family: 'Syne', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Subtle Washi paper grid */
+.japanese-grid {
+  background-image: 
+    linear-gradient(to right, rgba(6, 137, 167, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(250, 81, 104, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Glowing effects in Theme Palette */
+.rose-glow-box {
+  box-shadow: 0 0 35px -5px rgba(250, 81, 104, 0.3);
+}
+
+.teal-glow-box {
+  box-shadow: 0 0 35px -5px rgba(6, 137, 167, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(250, 81, 104, 0.5);
+}
+
+.text-glow-sky {
+  text-shadow: 0 0 25px rgba(103, 186, 230, 0.6);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(253, 157, 115, 0.5);
+}
+
+/* KATANA HAMON WAVE (Themed Gradient Tempered Blade Divider) */
+.hamon-divider {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(6, 137, 167, 0.8) 15%, 
+    rgba(103, 186, 230, 0.9) 35%, 
+    rgba(250, 81, 104, 0.95) 60%, 
+    rgba(253, 157, 115, 0.85) 85%, 
+    transparent
+  );
+}
+
+.hamon-divider::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 30%;
+  width: 40%;
+  height: 6px;
+  background: radial-gradient(ellipse at center, rgba(230, 203, 222, 0.95), transparent 70%);
+  filter: blur(1px);
+}
+
+/* KATANA BLADE FLASH */
+@keyframes katanaBladeFlash {
+  0% { transform: translateX(-150%) skewX(-30deg); opacity: 0; }
+  25% { opacity: 0.75; }
+  50% { opacity: 0.95; }
+  100% { transform: translateX(250%) skewX(-30deg); opacity: 0; }
+}
+
+.animate-katana-flash {
+  animation: katanaBladeFlash 3.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+/* ROTATING SAMURAI MON CREST */
+@keyframes samuraiMonSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-samurai-mon {
+  animation: samuraiMonSpin 40s linear infinite;
+}
+
+/* SAKURA AURA PULSE */
+@keyframes samuraiAuraPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px -5px rgba(250, 81, 104, 0.3), inset 0 0 18px rgba(6, 137, 167, 0.1);
+    border-color: rgba(250, 81, 104, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 50px 5px rgba(103, 186, 230, 0.5), inset 0 0 30px rgba(250, 81, 104, 0.2);
+    border-color: rgba(103, 186, 230, 0.8);
+  }
+}
+
+.animate-samurai-aura {
+  animation: samuraiAuraPulse 3s ease-in-out infinite;
+}
+
+/* DIAGONAL KATANA CARD HOVER */
+.katana-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.katana-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(103, 186, 230, 0.25) 48%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(250, 81, 104, 0.25) 52%,
+    transparent 55%
+  );
+  transform: translateX(-150%) rotate(45deg);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.katana-card:hover::before {
+  transform: translateX(150%) rotate(45deg);
+}
+
+.katana-card:hover {
+  box-shadow: 0 12px 40px rgba(1, 47, 97, 0.16);
+}
+
+/* SAMURAI SHIMMER BUTTON (Matching User Gradient Theme) */
+@keyframes samuraiBtnShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.samurai-btn {
+  background: linear-gradient(90deg, #012F61 0%, #0689A7 20%, #67BAE6 35%, #FA5168 55%, #FD9D73 75%, #012F61 100%);
+  background-size: 200% 100%;
+  animation: samuraiBtnShimmer 4s linear infinite;
+}
+
+/* GENTLE FLOATING */
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+.animate-float {
+  animation: floating 4.5s ease-in-out infinite;
+}
+
+/* INFINITE HORIZONTAL MARQUEE */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* TYPEWRITER CURSOR BLINK */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursorBlink 0.9s infinite;
+}
+
+/* DYNAMIC THEME MESH GRADIENT (Matches user image color positions) */
+@keyframes themeGradientShift {
+  0% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+  100% {
+    background-position: 0% 40%;
+  }
+}
+
+.theme-mesh-bg {
+  background-color: #012F61;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(1, 47, 97, 0.95) 0%, transparent 45%),
+    radial-gradient(circle at 40% 12%, rgba(6, 137, 167, 0.85) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(253, 157, 115, 0.9) 0%, transparent 45%),
+    radial-gradient(circle at 95% 35%, rgba(253, 154, 149, 0.88) 0%, transparent 42%),
+    radial-gradient(circle at 65% 30%, rgba(230, 203, 222, 0.85) 0%, transparent 35%),
+    radial-gradient(circle at 50% 60%, rgba(103, 186, 230, 0.85) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(250, 81, 104, 0.9) 0%, transparent 45%),
+    radial-gradient(circle at 75% 95%, rgba(200, 95, 162, 0.85) 0%, transparent 40%),
+    radial-gradient(circle at 15% 85%, rgba(46, 95, 198, 0.9) 0%, transparent 50%),
+    radial-gradient(circle at 55% 90%, rgba(63, 121, 203, 0.85) 0%, transparent 45%),
+    linear-gradient(135deg, #012F61 0%, #0689A7 35%, #FA5168 70%, #FD9D73 100%);
+  background-size: 220% 220%;
+  animation: themeGradientShift 22s ease-in-out infinite;
+}
+
+/* AMBIENT FLOATING GRADIENT LIGHT ORBS IN USER THEME */
+@keyframes floatOrbTheme1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(70px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-40px, 40px) scale(0.92);
+  }
+}
+
+@keyframes floatOrbTheme2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-80px, 60px) scale(1.14);
+  }
+  66% {
+    transform: translate(50px, -35px) scale(0.9);
+  }
+}
+
+@keyframes floatOrbTheme3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(60px, 75px) scale(1.18);
+  }
+}
+
+.animate-float-theme-1 {
+  animation: floatOrbTheme1 22s ease-in-out infinite;
+}
+
+.animate-float-theme-2 {
+  animation: floatOrbTheme2 26s ease-in-out infinite;
+}
+
+.animate-float-theme-3 {
+  animation: floatOrbTheme3 19s ease-in-out infinite;
+}
+
+/* Custom Scrollbar in Theme Tones */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #012F61;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0689A7, #FA5168);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #67BAE6, #FD9D73);
+}
+
+/* FLOATING HERO CUTOUT ANIMATION */
+@keyframes cutoutFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(0.6deg);
+  }
+}
+
+.animate-cutout-float {
+  animation: cutoutFloat 5.2s ease-in-out infinite;
+}
+
+@keyframes pedestalPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(0.85);
+    opacity: 0.25;
+  }
+}
+
+.animate-pedestal {
+  animation: pedestalPulse 5.2s ease-in-out infinite;
+}
